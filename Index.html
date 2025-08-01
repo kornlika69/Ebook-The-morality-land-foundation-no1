@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อีบุค - มูลนิธิเมืองฟ้าใหม่</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .lotus-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 50;
+        }
+        
+        .page-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        .nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+        
+        .nav-button:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .nav-prev {
+            left: 2rem;
+        }
+        
+        .nav-next {
+            right: 2rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="gradient-bg">
+    <!-- Navigation Buttons -->
+    <button class="nav-button nav-prev" onclick="previousPage()" id="prevBtn">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
+    
+    <button class="nav-button nav-next" onclick="nextPage()" id="nextBtn">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
+
+    <!-- Page Indicators -->
+    <div class="page-indicator">
+        <div class="page-dot active" onclick="goToPage(0)"></div>
+        <div class="page-dot" onclick="goToPage(1)"></div>
+        <div class="page-dot" onclick="goToPage(2)"></div>
+        <div class="page-dot" onclick="goToPage(3)"></div>
+        <div class="page-dot" onclick="goToPage(4)"></div>
+    </div>
+
+    <!-- Page 1: Cover -->
+    <div class="page fade-in" id="page-0">
+        <div class="bg-white rounded-3xl p-12 max-w-2xl mx-auto text-center card-shadow">
+            <!-- Foundation Logo -->
+            <div class="mb-8">
+                <img src="https://lh3.googleusercontent.com/d/1C6T-B75xztDpGmMedCHi1ZNuh6q_Eea-" 
+                     alt="โลโก้มูลนิธิเมืองฟ้าใหม่" 
+                     class="w-40 h-40 mx-auto mb-4 object-contain rounded-lg shadow-lg"
+                     onerror="this.src='https://drive.google.com/thumbnail?id=1C6T-B75xztDpGmMedCHi1ZNuh6q_Eea-&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                <div style="display:none;" class="w-40 h-40 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg shadow-lg flex items-center justify-center">
+                    <span class="text-white text-4xl">🏛️</span>
+                </div>
+            </div>
+            <h2 class="text-3xl font-semibold text-purple-600 mb-6">มูลนิธิเมืองฟ้าใหม่</h2>
+            <h3 class="text-xl text-gray-600 mb-8">The Morality Land Foundation</h3>
+            
+            <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-2xl p-6 mb-8">
+                <p class="text-lg text-gray-700 leading-relaxed font-medium">
+                    "พิทักษ์รักษาสถาบันหลักของชาติ<br>
+                    สืบทอดพระพุทธศาสนา<br>
+                    ช่วยเหลือเพื่อนมนุษย์ด้วยเมตตาธรรม"
+                </p>
+            </div>
+            
+            <div class="text-sm text-gray-500">
+                <p>📅 ก่อตั้งเมื่อ 7 พฤศจิกายน 2560</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: Founder Info -->
+    <div class="page fade-in hidden" id="page-1">
+        <div class="bg-white rounded-3xl p-10 max-w-5xl mx-auto card-shadow">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">ข้อมูลผู้ก่อตั้งมูลนิธิ</h2>
+                <div class="w-24 h-1 bg-purple-500 mx-auto rounded"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Founder Photo -->
+                <div class="md:col-span-1 text-center">
+                    <div class="mb-6">
+                        <img src="https://lh3.googleusercontent.com/d/1I4mzOEHVh1m5_oXYAvNsngOdE342EDgg" 
+                             alt="มหาอุบาสิกาคุณแม่บัวล้อม หารต๊ะ" 
+                             class="w-64 h-80 mx-auto object-cover rounded-2xl shadow-lg border-4 border-purple-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1I4mzOEHVh1m5_oXYAvNsngOdE342EDgg&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-64 h-80 mx-auto bg-gradient-to-br from-purple-500 to-blue-600 rounded-2xl shadow-lg flex items-center justify-center border-4 border-purple-200">
+                            <span class="text-white text-6xl">👤</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-purple-700 mb-2">มหาอุบาสิกาคุณแม่บัวล้อม หารต๊ะ</h3>
+                        <p class="text-gray-600 font-medium mb-2">ผู้ก่อตั้งมูลนิธิเมืองฟ้าใหม่</p>
+                        <p class="text-gray-600 text-sm">ประธานที่ปรึกษาคณะกรรมการมูลนิธิ</p>
+                    </div>
+                </div>
+                
+                <!-- Founder Description -->
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-2xl p-6 border-l-4 border-orange-500">
+                        <h4 class="text-xl font-semibold text-orange-700 mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🙏</span>
+                            บุคลิกภาพและความเชื่อ
+                        </h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            มหาอุบาสิกาคุณแม่บัวล้อม หารต๊ะ ผู้ที่มีจิตศรัทธาอันแรงกล้าต่อพระพุทธศาสนา และมีความมุ่งมั่นในการพิทักษ์รักษาสถาบันหลักของชาติ
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border-l-4 border-green-500">
+                        <h4 class="text-xl font-semibold text-green-700 mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🤝</span>
+                            การรวบรวมผู้คนเพื่อสังคม
+                        </h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            ด้วยความเมตตากรุณาและจิตสาธารณะ ท่านได้รวบรวมลูกหลานและผู้ที่มีจิตศรัทธาต่อสถาบันชาติ ศาสนา พระมหากษัตริย์ สืบทอดพระพุทธศาสนา เข้ามาปฏิบัติรักษาศีล สร้างสมบุญกุศล
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border-l-4 border-blue-500">
+                        <h4 class="text-xl font-semibold text-blue-700 mb-4 flex items-center">
+                            <span class="text-2xl mr-3">🏛️</span>
+                            โครงการสร้างพระมหาเจดีย์
+                        </h4>
+                        <p class="text-gray-700 leading-relaxed">
+                            สร้างพระมหาเจดีย์พระพุทธเจ้า 5 พระองค์ในภัททกัป และช่วยเหลือผู้ยากไร้และผู้ด้อยโอกาสในสังคม มานับตั้งแต่ปี 2549
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Foundation History -->
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8 border-2 border-indigo-200 mb-8">
+                <h4 class="text-2xl font-bold text-indigo-700 mb-6 text-center flex items-center justify-center">
+                    <span class="text-3xl mr-3">📜</span>
+                    ประวัติการก่อตั้งมูลนิธิโดยสังเขป
+                </h4>
+                
+                <div class="bg-white rounded-xl p-6 shadow-md mb-6">
+                    <div class="text-gray-700 leading-relaxed space-y-4">
+                        <p>
+                            <strong>คุณแม่บัวล้อม หารต๊ะ ประธานผู้ก่อตั้งมูลนิธิเมืองฟ้าใหม่</strong> ปรารถนาที่จะให้มูลนิธิเมืองฟ้าใหม่ เป็นศูนย์กลางการทำงาน เพื่อทดแทนคุณของแผ่นดิน รักษาไว้ซึ่งสถาบันชาติ ศาสนา และพระมหากษัตริย์
+                        </p>
+                        
+                        <p>
+                            มีความมุ่งมั่นที่จะทำหน้าที่ น้อมนำหลักคำสอนในพระพุทธศาสนาและหลักคำสอนตามหลักปรัชญาของเศรษฐกิจพอเพียง ของ<strong>พระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร รัชกาลที่ 9</strong> เป็นแนวทางในการช่วยเหลือผู้ที่ต้องการได้รับโอกาส
+                        </p>
+                        
+                        <p>
+                            ช่วยเหลือผู้ที่ประสบทุกข์จากความยากไร้ ยากจน ขาดอาชีพ เจ็บป่วย ขาดโอกาสในการศึกษา ให้สามารถบรรเทาทุกข์ และแก้ไขความทุกข์ด้วยตนเองได้อย่างแท้จริง ด้วยการเปลี่ยนแปลงการดำเนินชีวิตตนเองให้อยู่ในหลักคุณธรรม ศีลธรรม และความพอเหมาะพอดี
+                        </p>
+                        
+                        <p>
+                            ส่งเสริมให้สังคมมีความเข้มแข็งมั่นคงด้วยประเพณีและวัฒนธรรมอันดีงาม และสนับสนุนเสริมสร้างความเข้มแข็งให้แก่สถาบันการศึกษาและสถาบันทางพระพุทธศาสนา มอบทุนการศึกษาให้แก่เด็กดีที่มีความกตัญญู
+                        </p>
+                        
+                        <p>
+                            รวมทั้งการดูแลรักษาธรรมชาติสิ่งแวดล้อม ไม่ใช้สารพิษในการผลิตทางการเกษตรอันเป็นเหตุให้เกิดการเจ็บป่วยทั้งเกษตรกรและผู้บริโภค ส่งเสริมการดูแลสุขภาพด้วยสมุนไพร ไม่นำสารพิษเข้าสู่ร่างกาย และการรักษาสุขภาพด้วยวิถีพุทธวิถีธรรมและภูมิปัญญาการแพทย์แผนไทย
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 9 Funds Section -->
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border-2 border-yellow-200">
+                    <h5 class="text-xl font-bold text-orange-700 mb-4 text-center">
+                        🎯 พันธกิจและการพัฒนากองทุนในการช่วยเหลือ 9 ด้าน
+                    </h5>
+                    
+                    <div class="grid md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-blue-400">
+                            <p><strong>1.</strong> กองทุนทำนุบำรุงและสืบทอดอายุพระพุทธศาสนา</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-green-400">
+                            <p><strong>2.</strong> กองทุนการศึกษา</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-purple-400">
+                            <p><strong>3.</strong> กองทุนช่วยเหลือผู้สูงอายุและช่วยเหลือผู้ยากไร้ทั่วไป</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-pink-400">
+                            <p><strong>4.</strong> กองทุนการพัฒนาคุณธรรมเด็กและเยาวชนชาวพุทธต้นแบบของสังคม ช่วยเหลือเด็กด้อยโอกาส และป้องกันปัญหาจากอบายมุขและสิ่งเสพติด</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-indigo-400">
+                            <p><strong>5.</strong> กองทุนการส่งเสริมประเพณีวัฒนธรรมที่เกี่ยวข้องกับสถาบันชาติ ศาสนา พระมหากษัตริย์</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-teal-400">
+                            <p><strong>6.</strong> กองทุนส่งเสริมสุขภาพ ด้วยการใช้สมุนไพร วิถีพุทธวิถีธรรมและภูมิปัญญาการแพทย์แผนไทย</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-red-400">
+                            <p><strong>7.</strong> กองทุนพัฒนาอาชีพที่สามารถพึ่งพาตนเองและสร้างความเข้มแข็งให้ชุมชน</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-yellow-400">
+                            <p><strong>8.</strong> กองทุนการช่วยเหลืออาชีพการเกษตรไม่ใช้สารพิษใช้สมุนไพรปราบศัตรูพืช ฝึกฝนอบรมอาชีพ</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 shadow-sm border-l-4 border-emerald-400 md:col-span-2">
+                            <p><strong>9.</strong> กองทุนการดูแลสิ่งแวดล้อมและสาธารณะประโยชน์ต่างๆ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foundation Timeline -->
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border-2 border-purple-200">
+                <h4 class="text-2xl font-bold text-purple-700 mb-8 text-center flex items-center justify-center">
+                    <span class="text-3xl mr-3">⏰</span>
+                    ระยะเวลาการดำเนินงาน
+                </h4>
+                
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400 to-blue-400 rounded-full"></div>
+                    
+                    <div class="space-y-8">
+                        <!-- Phase 1: Before Foundation -->
+                        <div class="relative flex items-start">
+                            <div class="absolute left-6 w-5 h-5 bg-purple-500 rounded-full border-4 border-white shadow-lg"></div>
+                            <div class="ml-16 bg-white rounded-xl p-6 shadow-md border border-purple-200">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🌱</span>
+                                    <h5 class="text-xl font-bold text-purple-700">ปี 2549 - 2560</h5>
+                                </div>
+                                <h6 class="text-lg font-semibold text-gray-800 mb-2">ช่วงก่อนการก่อตั้งมูลนิธิ</h6>
+                                <p class="text-gray-700 leading-relaxed mb-3">
+                                    ดำเนินการช่วยเหลือสังคมและสร้างพระมหาเจดีย์พระพุทธเจ้า 5 พระองค์ในภัททกัป
+                                </p>
+                                <div class="bg-purple-50 rounded-lg p-3">
+                                    <p class="text-sm text-purple-700 font-medium">
+                                        💰 <strong>แหล่งทุน:</strong> ใช้ทุนทรัพย์ของตนเองและลูกหลานผู้ร่วมบุญ
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Phase 2: Foundation Establishment -->
+                        <div class="relative flex items-start">
+                            <div class="absolute left-6 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-lg"></div>
+                            <div class="ml-16 bg-white rounded-xl p-6 shadow-md border border-blue-200">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🏛️</span>
+                                    <h5 class="text-xl font-bold text-blue-700">ปี 2560</h5>
+                                </div>
+                                <h6 class="text-lg font-semibold text-gray-800 mb-2">การก่อตั้งมูลนิธิเมืองฟ้าใหม่</h6>
+                                <p class="text-gray-700 leading-relaxed mb-3">
+                                    เริ่มก่อตั้งมูลนิธิเมืองฟ้าใหม่อย่างเป็นทางการ เมื่อวันที่ 7 พฤศจิกายน 2560
+                                </p>
+                                <div class="bg-blue-50 rounded-lg p-3">
+                                    <p class="text-sm text-blue-700 font-medium">
+                                        🎯 <strong>วัตถุประสงค์:</strong> ขยายผลการช่วยเหลือให้กว้างขวางและยั่งยืน
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Phase 3: Current Operations -->
+                        <div class="relative flex items-start">
+                            <div class="absolute left-6 w-5 h-5 bg-green-500 rounded-full border-4 border-white shadow-lg animate-pulse"></div>
+                            <div class="ml-16 bg-white rounded-xl p-6 shadow-md border border-green-200">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-2xl mr-3">🌟</span>
+                                    <h5 class="text-xl font-bold text-green-700">ปี 2560 - 2568 (ปัจจุบัน)</h5>
+                                </div>
+                                <h6 class="text-lg font-semibold text-gray-800 mb-2">การดำเนินงานภายใต้มูลนิธิ</h6>
+                                <p class="text-gray-700 leading-relaxed mb-3">
+                                    ดำเนินกิจกรรมต่างๆ ภายใต้กรอบมูลนิธิ เพื่อพิทักษ์รักษาสถาบันหลักของชาติ สืบทอดพระพุทธศาสนา และช่วยเหลือเพื่อนมนุษย์
+                                </p>
+                                <div class="bg-green-50 rounded-lg p-3">
+                                    <p class="text-sm text-green-700 font-medium">
+                                        ⏳ <strong>ระยะเวลา:</strong> 8 ปี และยังคงดำเนินการต่อไป
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary Box -->
+                <div class="mt-8 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-6 border-2 border-indigo-200">
+                    <h6 class="text-lg font-bold text-indigo-700 mb-3 text-center">📊 สรุประยะเวลาการดำเนินงาน</h6>
+                    <div class="grid md:grid-cols-3 gap-4 text-center">
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <p class="text-2xl font-bold text-purple-600">11 ปี</p>
+                            <p class="text-sm text-gray-600">ก่อนก่อตั้งมูลนิธิ<br>(2549-2560)</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <p class="text-2xl font-bold text-blue-600">1 ปี</p>
+                            <p class="text-sm text-gray-600">ปีก่อตั้งมูลนิธิ<br>(2560)</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <p class="text-2xl font-bold text-green-600">8 ปี</p>
+                            <p class="text-sm text-gray-600">ดำเนินงานภายใต้มูลนิธิ<br>(2560-2568)</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="text-lg font-bold text-indigo-700">รวม 19 ปี ของการทำงานเพื่อสังคม</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Objectives & Foundation Document -->
+    <div class="page fade-in hidden" id="page-2">
+        <div class="bg-white rounded-3xl p-10 max-w-4xl mx-auto card-shadow">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">วัตถุประสงค์ของมูลนิธิ</h2>
+                <div class="w-24 h-1 bg-purple-500 mx-auto rounded"></div>
+                <p class="text-gray-600 mt-4">ตามที่ประกาศในราชกิจจานุเบกษา</p>
+            </div>
+            
+            <div class="space-y-6 mb-8">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border-l-4 border-blue-500">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-3 flex items-center">
+                        <span class="text-2xl mr-3">📚</span>
+                        การศึกษาและการเรียนรู้
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        ส่งเสริมการศึกษา การเรียนรู้ และการพัฒนาทักษะชีวิตที่ดีงามตามหลักธรรมะ
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold text-green-700 mb-3 flex items-center">
+                        <span class="text-2xl mr-3">🤝</span>
+                        การสร้างสรรค์สังคม
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        สร้างสรรค์สังคมที่มีคุณธรรม จริยธรรม และความเมตตากรุณาต่อกัน
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border-l-4 border-purple-500">
+                    <h3 class="text-xl font-semibold text-purple-700 mb-3 flex items-center">
+                        <span class="text-2xl mr-3">🌱</span>
+                        การพัฒนาจิตใจ
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        ส่งเสริมการพัฒนาจิตใจและการปฏิบัติธรรมเพื่อความสุขที่แท้จริง
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-2xl p-6 border-l-4 border-orange-500">
+                    <h3 class="text-xl font-semibold text-orange-700 mb-3 flex items-center">
+                        <span class="text-2xl mr-3">🌍</span>
+                        การรับใช้สังคม
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        ดำเนินกิจกรรมเพื่อสาธารณประโยชน์และการพัฒนาสังคมอย่างยั่งยืน
+                    </p>
+                </div>
+            </div>
+
+            <!-- Foundation Document Link -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 text-center">
+                <h3 class="text-2xl font-semibold text-blue-700 mb-4 flex items-center justify-center">
+                    <span class="text-3xl mr-3">📋</span>
+                    ประกาศจัดตั้งมูลนิธิ
+                </h3>
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    ดูรายละเอียดวัตถุประสงค์ของมูลนิธิตามที่ประกาศในราชกิจจานุเบกษา
+                </p>
+                <a href="https://ratchakitcha.soc.go.th/documents/2128578.pdf" 
+                   target="_blank" 
+                   class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    ดูเอกสารราชกิจจานุเบกษา
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Honorary Advisors -->
+    <div class="page fade-in hidden" id="page-3">
+        <div class="bg-white rounded-3xl p-8 max-w-6xl mx-auto card-shadow overflow-y-auto max-h-screen">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">ที่ปรึกษากิตติมศักดิ์</h2>
+                <div class="w-24 h-1 bg-purple-500 mx-auto rounded"></div>
+            </div>
+            
+            <!-- Honorary Advisors Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- Advisor 1 -->
+                <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 text-center border-2 border-orange-200 shadow-lg">
+                    <img src="https://lh3.googleusercontent.com/d/1Cip6qzI1czhyq3jW3mBfihGTngPdvqPK" 
+                         alt="พระเดชพระคุณพระราชปัญญาภรณ์" 
+                         class="w-40 h-48 mx-auto object-cover rounded-xl shadow-md mb-4 border-4 border-orange-200"
+                         onerror="this.src='https://drive.google.com/thumbnail?id=1Cip6qzI1czhyq3jW3mBfihGTngPdvqPK&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                    <div style="display:none;" class="w-40 h-48 mx-auto bg-gradient-to-br from-orange-400 to-yellow-500 rounded-xl shadow-md mb-4 flex items-center justify-center border-4 border-orange-200">
+                        <span class="text-white text-4xl">🙏</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-orange-700 mb-2">พระเดชพระคุณพระราชปัญญาภรณ์</h4>
+                    <p class="text-sm text-gray-600 mb-1">รองเจ้าคณะภาค 6</p>
+                    <p class="text-sm text-gray-600 mb-1">เจ้าอาวาสวัดนางชี กรุงเทพมหานคร</p>
+                    <p class="text-xs text-orange-600 font-semibold">ที่ปรึกษากิตติมศักดิ์</p>
+                </div>
+
+                <!-- Advisor 2 -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 text-center border-2 border-green-200 shadow-lg">
+                    <img src="https://lh3.googleusercontent.com/d/1EhP9dgvbM2MzGZcQ2rU6a6Ysmy50h7fF" 
+                         alt="พระเดชพระคุณพระสุนทรมุนี" 
+                         class="w-40 h-48 mx-auto object-cover rounded-xl shadow-md mb-4 border-4 border-green-200"
+                         onerror="this.src='https://drive.google.com/thumbnail?id=1EhP9dgvbM2MzGZcQ2rU6a6Ysmy50h7fF&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                    <div style="display:none;" class="w-40 h-48 mx-auto bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl shadow-md mb-4 flex items-center justify-center border-4 border-green-200">
+                        <span class="text-white text-4xl">🙏</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-green-700 mb-2">พระเดชพระคุณพระสุนทรมุนี</h4>
+                    <p class="text-sm text-gray-600 mb-1">รองเจ้าคณะจังหวัดน่าน</p>
+                    <p class="text-sm text-gray-600 mb-1">เจ้าอาวาสวัดมิ่งเมือง จังหวัดน่าน</p>
+                    <p class="text-xs text-green-600 font-semibold">ที่ปรึกษากิตติมศักดิ์</p>
+                </div>
+
+                <!-- Advisor 3 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 text-center border-2 border-blue-200 shadow-lg">
+                    <img src="https://lh3.googleusercontent.com/d/1iyvgTzYk-eL91WiuVZTcpdUrqhTG6XP1" 
+                         alt="พระครูภาวนาวีรวัตร" 
+                         class="w-40 h-48 mx-auto object-cover rounded-xl shadow-md mb-4 border-4 border-blue-200"
+                         onerror="this.src='https://drive.google.com/thumbnail?id=1iyvgTzYk-eL91WiuVZTcpdUrqhTG6XP1&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                    <div style="display:none;" class="w-40 h-48 mx-auto bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl shadow-md mb-4 flex items-center justify-center border-4 border-blue-200">
+                        <span class="text-white text-4xl">🙏</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-blue-700 mb-2">พระครูภาวนาวีรวัตร</h4>
+                    <p class="text-sm text-gray-600 mb-1">(หลวงปู่มุณีน้อย ภูริปัญโญ)</p>
+                    <p class="text-sm text-gray-600 mb-1">เจ้าอาวาสวัดโพนทอง อำเภอท่าลี่ จังหวัดเลย</p>
+                    <p class="text-xs text-blue-600 font-semibold">ที่ปรึกษากิตติมศักดิ์</p>
+                </div>
+            </div>
+
+            <!-- Foundation Advisors Section -->
+            <div class="mb-12">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ประธานที่ปรึกษามูลนิธิ และคณะที่ปรึกษามูลนิธิ</h3>
+                    <div class="w-20 h-1 bg-indigo-500 mx-auto rounded"></div>
+                </div>
+
+                <!-- Individual Advisors Grid -->
+                <div class="grid md:grid-cols-4 gap-4">
+                    <!-- Chairman -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 text-center border-2 border-purple-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/12WlqQ40JBc-61BALqRksnlv92zBMID2u" 
+                             alt="มหาอุบาสิกาคุณแม่บัวล้อม หารต๊ะ" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-purple-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=12WlqQ40JBc-61BALqRksnlv92zBMID2u&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-purple-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-purple-700 mb-1">มหาอุบาสิกาคุณแม่บัวล้อม หารต๊ะ</h5>
+                        <p class="text-xs text-gray-600">ประธานที่ปรึกษาคณะกรรมการมูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 1 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-4 text-center border-2 border-blue-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1LM6WRlEUgWcqKbokDPOa2rX0CxZ3grrN" 
+                             alt="พลเอกวรยุทธ ด้วงกลัด" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-blue-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1LM6WRlEUgWcqKbokDPOa2rX0CxZ3grrN&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-blue-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-blue-700 mb-1">พลเอกวรยุทธ ด้วงกลัด</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 2 -->
+                    <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-4 text-center border-2 border-green-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1AQFXvihPiy7jIPFrdUaV2_BuXW57AsoY" 
+                             alt="ผศ.วรรณวิมล ด้วงกลัด" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-green-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1AQFXvihPiy7jIPFrdUaV2_BuXW57AsoY&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-green-400 to-teal-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-green-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-green-700 mb-1">ผศ.วรรณวิมล ด้วงกลัด</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 3 -->
+                    <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 text-center border-2 border-orange-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1AYdT2tfQQPVM31wp2Y9d7mr33ODMJLh3" 
+                             alt="อาจารย์แม่อโณทัย ศรีศาลา" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-orange-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1AYdT2tfQQPVM31wp2Y9d7mr33ODMJLh3&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-orange-400 to-red-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-orange-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-orange-700 mb-1">อาจารย์แม่อโณทัย ศรีศาลา</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 4 -->
+                    <div class="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-4 text-center border-2 border-yellow-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1wVMExjq_9xXftkBC4cFsIngCluDs3aP4" 
+                             alt="คุณชนะชัย ทองสา" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-yellow-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1wVMExjq_9xXftkBC4cFsIngCluDs3aP4&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-yellow-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-yellow-700 mb-1">คุณชนะชัย ทองสา</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 5 -->
+                    <div class="bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl p-4 text-center border-2 border-pink-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1R7EiYlJI6tVVXaJYlvJnXsJKHZwANf9G" 
+                             alt="คุณจิรภัทร รัชดาธนาวดี" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-pink-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1R7EiYlJI6tVVXaJYlvJnXsJKHZwANf9G&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-pink-400 to-rose-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-pink-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-pink-700 mb-1">คุณจิรภัทร รัชดาธนาวดี</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 6 -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-4 text-center border-2 border-indigo-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1ogHK4XnOTOPgHfYIma3AFfGnZBJ2tzoD" 
+                             alt="คุณพัตร์พิมล รัชดาธนาวดี" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-indigo-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1ogHK4XnOTOPgHfYIma3AFfGnZBJ2tzoD&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-indigo-400 to-purple-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-indigo-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-indigo-700 mb-1">คุณพัตร์พิมล รัชดาธนาวดี</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+
+                    <!-- Advisor 7 -->
+                    <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-4 text-center border-2 border-teal-200 shadow-md">
+                        <img src="https://lh3.googleusercontent.com/d/1nDPFHhPhNJxMkGrkUuyNFy212iPqHfCQ" 
+                             alt="คุณณัฐกานต์ บิณฑวิหค" 
+                             class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-teal-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1nDPFHhPhNJxMkGrkUuyNFy212iPqHfCQ&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-teal-400 to-cyan-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-teal-200">
+                            <span class="text-white text-2xl">👤</span>
+                        </div>
+                        <h5 class="text-sm font-bold text-teal-700 mb-1">คุณณัฐกานต์ บิณฑวิหค</h5>
+                        <p class="text-xs text-gray-600">ที่ปรึกษามูลนิธิ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Committee Members -->
+    <div class="page fade-in hidden" id="page-4">
+        <div class="bg-white rounded-3xl p-8 max-w-6xl mx-auto card-shadow overflow-y-auto max-h-screen">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">คณะกรรมการมูลนิธิ</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto rounded"></div>
+            </div>
+
+            <!-- Organizational Chart Style -->
+            <div class="space-y-8">
+                <!-- Chairman -->
+                <div class="text-center">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4">ประธานกรรมการมูลนิธิ</h3>
+                    <div class="inline-block bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border-2 border-blue-200 shadow-lg">
+                        <img src="https://lh3.googleusercontent.com/d/1f0n4cLSJiqRelUfA7ZNEjb5mkEBtnTlE" 
+                             alt="คุณภาณุวัฒน์ พันธ์บัวหลวง" 
+                             class="w-40 h-48 mx-auto object-cover rounded-xl shadow-md mb-4 border-4 border-blue-200"
+                             onerror="this.src='https://drive.google.com/thumbnail?id=1f0n4cLSJiqRelUfA7ZNEjb5mkEBtnTlE&sz=w400'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                        <div style="display:none;" class="w-40 h-48 mx-auto bg-gradient-to-br from-blue-400 to-indigo-500 rounded-xl shadow-md mb-4 flex items-center justify-center border-4 border-blue-200">
+                            <span class="text-white text-4xl">👤</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-blue-700">คุณภาณุวัฒน์ พันธ์บัวหลวง</h4>
+                        <p class="text-sm text-gray-600">ประธานกรรมการมูลนิธิ</p>
+                    </div>
+                </div>
+
+                <!-- Vice Chairmen -->
+                <div>
+                    <h3 class="text-xl font-bold text-green-700 mb-4 text-center">รองประธานกรรมการมูลนิธิ</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Vice Chairman 1 -->
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-4 text-center border-2 border-green-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1a9tunRDelxKi4GjJdd48b5yigAmd-Uz7" 
+                                 alt="คุณนุกุล เครือฟู" 
+                                 class="w-32 h-40 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-green-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1a9tunRDelxKi4GjJdd48b5yigAmd-Uz7&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-32 h-40 mx-auto bg-gradient-to-br from-green-400 to-emerald-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-green-200">
+                                <span class="text-white text-3xl">👤</span>
+                            </div>
+                            <h5 class="text-base font-bold text-green-700 mb-1">คุณนุกุล เครือฟู</h5>
+                            <p class="text-xs text-gray-600">รองประธานกรรมการมูลนิธิ</p>
+                        </div>
+
+                        <!-- Vice Chairman 2 -->
+                        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 text-center border-2 border-purple-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/18Yk-UyxMRkO1ThtnAg1GbKyxEjdY_iO6" 
+                                 alt="ทนายธรรมราช สาระปัญญา" 
+                                 class="w-32 h-40 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-purple-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=18Yk-UyxMRkO1ThtnAg1GbKyxEjdY_iO6&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-32 h-40 mx-auto bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-purple-200">
+                                <span class="text-white text-3xl">👤</span>
+                            </div>
+                            <h5 class="text-base font-bold text-purple-700 mb-1">ทนายธรรมราช สาระปัญญา</h5>
+                            <p class="text-xs text-gray-600">รองประธานกรรมการมูลนิธิ</p>
+                        </div>
+
+                        <!-- Vice Chairman 3 -->
+                        <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 text-center border-2 border-orange-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/11mFZ4qUz7bBM935rrFpYTX9Dbtd7y16G" 
+                                 alt="คุณทศพล หารต๊ะ" 
+                                 class="w-32 h-40 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-orange-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=11mFZ4qUz7bBM935rrFpYTX9Dbtd7y16G&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-32 h-40 mx-auto bg-gradient-to-br from-orange-400 to-red-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-orange-200">
+                                <span class="text-white text-3xl">👤</span>
+                            </div>
+                            <h5 class="text-base font-bold text-orange-700 mb-1">คุณทศพล หารต๊ะ</h5>
+                            <p class="text-xs text-gray-600">รองประธานกรรมการมูลนิธิ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Committee Members -->
+                <div>
+                    <h3 class="text-xl font-bold text-indigo-700 mb-4 text-center">กรรมการ</h3>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <!-- Member 1 -->
+                        <div class="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-4 text-center border-2 border-yellow-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1Pf4P0T1TWJpHSeIvGwGeStuKCpV1IAoJ" 
+                                 alt="คุณศรุต ศิริธรศรุดา" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-yellow-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1Pf4P0T1TWJpHSeIvGwGeStuKCpV1IAoJ&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-yellow-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-yellow-700 mb-1">คุณศรุต ศิริธรศรุดา</h5>
+                            <p class="text-xs text-gray-600">กรรมการ</p>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-4 text-center border-2 border-teal-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/15fFqC12GUWFfwgBXFoe8DEJxlEN2YzlA" 
+                                 alt="คุณวิเชียร ใหม่เงิน" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-teal-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=15fFqC12GUWFfwgBXFoe8DEJxlEN2YzlA&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-teal-400 to-cyan-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-teal-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-teal-700 mb-1">คุณวิเชียร ใหม่เงิน</h5>
+                            <p class="text-xs text-gray-600">กรรมการ</p>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-xl p-4 text-center border-2 border-rose-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1FuthAi8aG-XYjL951rJyui8BfPTiLyRr" 
+                                 alt="คุณปานพงษ์ พุ่มเรือง" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-rose-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1FuthAi8aG-XYjL951rJyui8BfPTiLyRr&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-rose-400 to-pink-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-rose-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-rose-700 mb-1">คุณปานพงษ์ พุ่มเรือง</h5>
+                            <p class="text-xs text-gray-600">กรรมการ</p>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="bg-gradient-to-br from-lime-50 to-green-50 rounded-xl p-4 text-center border-2 border-lime-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1GWWKts_bYXv1yYxBvWqqBzGhrZW_uxZp" 
+                                 alt="คุณอังคณา เมฆวิลัย" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-lime-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1GWWKts_bYXv1yYxBvWqqBzGhrZW_uxZp&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-lime-400 to-green-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-lime-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-lime-700 mb-1">คุณอังคณา เมฆวิลัย</h5>
+                            <p class="text-xs text-gray-600">กรรมการ</p>
+                        </div>
+
+                        <!-- Member 5 -->
+                        <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-4 text-center border-2 border-violet-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1VwOxq0EjlY9vz6GjQj-lopYrNpgWl9re" 
+                                 alt="คุณอรุณีย์ กันหา" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-violet-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1VwOxq0EjlY9vz6GjQj-lopYrNpgWl9re&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-violet-400 to-purple-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-violet-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-violet-700 mb-1">คุณอรุณีย์ กันหา</h5>
+                            <p class="text-xs text-gray-600">กรรมการ</p>
+                        </div>
+
+                        <!-- Treasurer -->
+                        <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-4 text-center border-2 border-emerald-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1wYhdTlfTxse3dwF-x8bUQQ-gqHiotROl" 
+                                 alt="คุณปิยะพร เสนาวนา" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-emerald-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1wYhdTlfTxse3dwF-x8bUQQ-gqHiotROl&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-emerald-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-emerald-700 mb-1">คุณปิยะพร เสนาวนา</h5>
+                            <p class="text-xs text-gray-600">กรรมการและเหรัญญิก</p>
+                        </div>
+
+                        <!-- Assistant Treasurer -->
+                        <div class="bg-gradient-to-br from-sky-50 to-blue-50 rounded-xl p-4 text-center border-2 border-sky-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/17b4mY917qyGr7NBOzgEhc8XyhpUSwILp" 
+                                 alt="ณัชชา จำรูญจันทร์" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-sky-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=17b4mY917qyGr7NBOzgEhc8XyhpUSwILp&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-sky-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-sky-700 mb-1">ณัชชา จำรูญจันทร์</h5>
+                            <p class="text-xs text-gray-600">กรรมการและผู้ช่วยเหรัญญิก</p>
+                        </div>
+
+                        <!-- Secretary -->
+                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-4 text-center border-2 border-amber-200 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1gFHDvnoGe1tdefwXwMDVO7xT6IRCWUx4" 
+                                 alt="กรลิกา คุณพรมไชยวงค์" 
+                                 class="w-28 h-36 mx-auto object-cover rounded-lg shadow-sm mb-3 border-2 border-amber-200"
+                                 onerror="this.src='https://drive.google.com/thumbnail?id=1gFHDvnoGe1tdefwXwMDVO7xT6IRCWUx4&sz=w300'; this.onerror=function(){this.style.display='none'; this.nextElementSibling.style.display='block';};">
+                            <div style="display:none;" class="w-28 h-36 mx-auto bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg shadow-sm mb-3 flex items-center justify-center border-2 border-amber-200">
+                                <span class="text-white text-2xl">👤</span>
+                            </div>
+                            <h5 class="text-sm font-bold text-amber-700 mb-1">กรลิกา คุณพรมไชยวงค์</h5>
+                            <p class="text-xs text-gray-600">กรรมการและเลขานุการ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="mt-8 text-center bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-6">
+                <p class="text-gray-600 text-lg">
+                    🌟 <strong>คณะกรรมการมูลนิธิเมืองฟ้าใหม่</strong> 🌟<br>
+                    <em>"ร่วมกันสร้างสรรค์สังคมที่ดีงามด้วยหลักธรรมะ"</em>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 5;
+        
+        function showPage(pageIndex) {
+            // Hide all pages
+            for (let i = 0; i < totalPages; i++) {
+                document.getElementById(`page-${i}`).classList.add('hidden');
+                document.querySelectorAll('.page-dot')[i].classList.remove('active');
+            }
+            
+            // Show current page
+            document.getElementById(`page-${pageIndex}`).classList.remove('hidden');
+            document.querySelectorAll('.page-dot')[pageIndex].classList.add('active');
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').style.display = pageIndex === 0 ? 'none' : 'flex';
+            document.getElementById('nextBtn').style.display = pageIndex === totalPages - 1 ? 'none' : 'flex';
+            
+            currentPage = pageIndex;
+        }
+        
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                showPage(currentPage + 1);
+            }
+        }
+        
+        function previousPage() {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+            }
+        }
+        
+        function goToPage(pageIndex) {
+            showPage(pageIndex);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousPage();
+            }
+        });
+        
+        // Initialize
+        showPage(0);
+        
+        // Add smooth transitions
+        document.querySelectorAll('.page').forEach(page => {
+            page.style.transition = 'opacity 0.5s ease-in-out';
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967f01c1d0197337',t:'MTc1Mzk4NDk0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
